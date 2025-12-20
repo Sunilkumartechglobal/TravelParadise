@@ -4,6 +4,12 @@ import { google } from 'googleapis';
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
+console.log({
+  SPREADSHEET_ID,
+  ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+  GOOGLE_APPLICATION_CREDENTIALS_JSON: process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON,
+})
+
 async function getSheetsClient() {
   const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}');
   const auth = new google.auth.GoogleAuth({
