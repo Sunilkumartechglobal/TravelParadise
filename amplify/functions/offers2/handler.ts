@@ -4,9 +4,6 @@ import { google } from 'googleapis';
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
 async function getSheetsClient() {
-  console.log("RAW CREDS ENV (first 200 chars):",
-  process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON
-);
   const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}');
   const auth = new google.auth.GoogleAuth({
     credentials,
