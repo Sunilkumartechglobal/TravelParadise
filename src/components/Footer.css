@@ -96,12 +96,15 @@
   margin: 0;
 }
 
+/* 1. കണ്ടെയ്‌നർ സെക്ഷൻ */
 .social-links {
   display: flex;
   gap: var(--spacing-3);
   margin-top: var(--spacing-6);
+  align-items: center;
 }
 
+/* 2. ഐക്കണുകളുടെ പൊതുവായ രൂപം */
 .social-link {
   display: flex;
   align-items: center;
@@ -110,16 +113,21 @@
   height: 40px;
   background: var(--color-border);
   border-radius: var(--radius-md);
-  color: var(--color-dark-text-secondary);
   transition: var(--transition-ease);
+  text-decoration: none;
 }
 
+/* 3. ഓരോ ഐക്കണിനും പ്രത്യേകം നിറങ്ങൾ */
+.social-link.instagram { color: #E4405F; }
+.social-link.youtube { color: #FF0000; }
+.social-link.facebook { color: #1877F2; }
+
+/* 4. മൗസ് വെക്കുമ്പോൾ ഉള്ള മാറ്റം (Hover Effect) */
 .social-link:hover {
   background: var(--color-accent);
-  color: var(--color-dark-text-primary);
   transform: translateY(-2px);
+  /* ഇതിൽ 'color' നൽകാത്തതിനാൽ മൗസ് വെക്കുമ്പോഴും മുകളിൽ നൽകിയ ഒറിജിനൽ നിറങ്ങൾ മാറുകയില്ല */
 }
-
 /* Link Sections */
 .footer-title-destination {
   font-size: var(--font-base);
