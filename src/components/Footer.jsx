@@ -60,15 +60,44 @@ const Footer = () => {
                 <p className="footer-description">
                   {t('description')}
                 </p>
-                <div className="social-links">
-                  <a href="#" aria-label="Facebook" className="social-link"><Facebook size={20} /></a>
-                  <a href="#" aria-label="Instagram" className="social-link"><Instagram size={20} /></a>
-                  <a href="#" aria-label="Twitter" className="social-link"><Twitter size={20} /></a>
-                  <a href="#" aria-label="YouTube" className="social-link"><Youtube size={20} /></a>
-                </div>
-              </div>
-            </div>
-            <div className="footer-section-destination">
+<div className="social-links">
+  
+  {/* Instagram */}
+  <a 
+    href="https://www.instagram.com/kerala_tourist_information" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    aria-label="Instagram" 
+    className="social-link instagram"
+  >
+    <Instagram size={24} />
+  </a>
+
+  {/* YouTube */}
+  <a 
+    href="https://www.youtube.com/@ajayakumar4885/featured" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    aria-label="YouTube" 
+    className="social-link youtube"
+  >
+    <Youtube size={24} />
+  </a>
+
+  {/* Facebook */}
+  <a 
+    href="https://www.facebook.com/share/1Aqr8LQUgm/" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    aria-label="Facebook" 
+    className="social-link facebook"
+  >
+    <Facebook size={24} />
+  </a>
+  
+</div>
+                
+                <div className="footer-section-destination">
               <h3 className="footer-title-destination"><Link to="/destinations" className="footer-title-link">{t('destinations.title')}</Link></h3>
               <ul className="footer-links-destination">
                 {destinationLinks.map(linkKey => (
