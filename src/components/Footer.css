@@ -103,31 +103,36 @@
   margin-top: var(--spacing-6);
   align-items: center;
 }
-
-/* 2. ഐക്കണുകളുടെ പൊതുവായ രൂപം */
+/* പഴയ .social-link ഒഴിവാക്കി ഇത് പേസ്റ്റ് ചെയ്യുക */
 .social-link {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
+  justify-content: flex-start;
+  padding: 0 15px;
+  min-width: 40px;
+  width: auto; /* അക്ഷരങ്ങളുടെ നീളത്തിനനുസരിച്ച് ബോക്സ് വലുതാകും */
   height: 40px;
   background: var(--color-border);
   border-radius: var(--radius-md);
   transition: var(--transition-ease);
   text-decoration: none;
+  gap: 10px; /* ഐക്കണും പേരും തമ്മിലുള്ള അകലം */
+  font-weight: 500;
+  font-size: 14px;
 }
 
-/* 3. ഓരോ ഐക്കണിനും പ്രത്യേകം നിറങ്ങൾ */
+/* ഓരോ സോഷ്യൽ മീഡിയ ലിങ്കിനും ഉള്ള നിറങ്ങൾ */
 .social-link.instagram { color: #E4405F; }
 .social-link.youtube { color: #FF0000; }
 .social-link.facebook { color: #1877F2; }
 
-/* 4. മൗസ് വെക്കുമ്പോൾ ഉള്ള മാറ്റം (Hover Effect) */
+/* മൗസ് വെക്കുമ്പോൾ ഉള്ള മാറ്റം */
 .social-link:hover {
   background: var(--color-accent);
   transform: translateY(-2px);
-  /* ഇതിൽ 'color' നൽകാത്തതിനാൽ മൗസ് വെക്കുമ്പോഴും മുകളിൽ നൽകിയ ഒറിജിനൽ നിറങ്ങൾ മാറുകയില്ല */
+  color: var(--color-dark-text-primary); /* ഹോവർ ചെയ്യുമ്പോൾ ടെക്സ്റ്റ് വ്യക്തമാകാൻ */
 }
+
 /* Link Sections */
 .footer-title-destination {
   font-size: var(--font-base);
