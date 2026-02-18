@@ -49,7 +49,7 @@ const Footer = () => {
                     aria-label="Instagram" 
                     className="social-link instagram"
                   >
-                    <Instagram size={24} />
+                    <Instagram size={24} /><span>Instagram</span>
                   </a>
 
                   {/* YouTube */}
@@ -60,7 +60,7 @@ const Footer = () => {
                     aria-label="YouTube" 
                     className="social-link youtube"
                   >
-                    <Youtube size={24} />
+                    <Youtube size={24} /><span>YouTube</span>
                   </a>
 
                   {/* Facebook */}
@@ -71,7 +71,7 @@ const Footer = () => {
                     aria-label="Facebook" 
                     className="social-link facebook"
                   >
-                    <Facebook size={24} />
+                    <Facebook size={24} /><span>Facebook</span>
                   </a>
                 </div>
               </div>
