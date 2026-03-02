@@ -1,399 +1,144 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('');
 
-* {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+{
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
 }
 
 .houseboat-booking-container {
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #f9fafb, #f3f4f6);
-  margin-top: 70px;
+min-height: 100vh;
+background: linear-gradient(to bottom, #f9fafb, #f3f4f6);
+padding-top: 80px;
+padding-bottom: 50px;
 }
 
 .houseboat-main-content {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 24px 16px;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
 }
 
 .houseboat-grid-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+display: grid;
+grid-template-columns: 1fr;
+gap: 30px;
 }
 
 @media (min-width: 1024px) {
-  .houseboat-grid-layout {
-    grid-template-columns: 2fr 1fr;
-  }
+.houseboat-grid-layout {
+grid-template-columns: 1.8fr 1.2fr;
+}
 }
 
 .houseboat-content-section {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+display: flex;
+flex-direction: column;
+gap: 25px;
 }
 
 .houseboat-image-gallery {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  background: #1f2937;
-  height: 500px;
+position: relative;
+width: 100%;
+height: 450px;
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+background: #000;
 }
 
 .houseboat-gallery-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+width: 100%;
+height: 100%;
+object-fit: cover;
 }
 
 .houseboat-gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.95);
-  padding: 12px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background: rgba(255, 255, 255, 0.9);
+border: none;
+width: 45px;
+height: 45px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+z-index: 10;
 }
 
-.houseboat-gallery-btn:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.houseboat-gallery-btn-left {
-  left: 16px;
-}
-.houseboat-gallery-btn-right {
-  right: 16px;
-}
-
-.houseboat-gallery-dots {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.houseboat-gallery-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-}
-
-.houseboat-gallery-dot-active {
-  width: 32px;
-  background: white;
-}
-
-.houseboat-gallery-counter {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
-}
+.houseboat-gallery-btn-left { left: 15px; }
+.houseboat-gallery-btn-right { right: 15px; }
 
 .houseboat-card {
-  background: white;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+background: #fff;
+border-radius: 12px;
+padding: 24px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .houseboat-card-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 40px;
-}
-
-.houseboat-card-subtitle {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 16px;
+font-size: 28px;
+font-weight: 800;
+color: #111827;
+margin-bottom: 12px;
 }
 
 .houseboat-location-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  color: #4b5563;
-}
-
-.houseboat-location-item,
-.houseboat-rating-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.houseboat-icon {
-  width: 20px;
-  height: 20px;
-  color: #4b5563;
-  flex-shrink: 0;
-}
-
-.houseboat-rating-star {
-  color: #fbbf24;
-  fill: #fbbf24;
-}
-
-.houseboat-rating-score {
-  font-weight: 700;
-  color: #111827;
-}
-
-.houseboat-rating-reviews {
-  font-weight: 500;
-  color: #9ca3af;
-}
-
-.houseboat-host-section {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.houseboat-host-image {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.houseboat-host-verified {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  color: #2563eb;
-}
-
-.houseboat-verified-badge {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #2563eb;
-  font-weight: 600;
-}
-
-.houseboat-response-time {
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.houseboat-description-text {
-  color: #4b5563;
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-
-.houseboat-features-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-@media (min-width: 640px) {
-  .houseboat-features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.houseboat-feature-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-}
-
-.houseboat-feature-item:hover {
-  background-color: #f9fafb;
-}
-
-.houseboat-feature-text {
-  color: #1f2937;
-}
-
-.houseboat-show-more-btn {
-  margin-top: 16px;
-  color: #2563eb;
-  font-weight: 500;
-  border: none;
-  background: none;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.houseboat-amenities-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
-}
-
-@media (min-width: 640px) {
-  .houseboat-amenities-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.houseboat-amenity-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.houseboat-amenity-check {
-  color: #10b981;
-}
-
-.houseboat-amenity-text {
-  color: #4b5563;
+display: flex;
+align-items: center;
+gap: 12px;
+color: #4b5563;
 }
 
 .houseboat-booking-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-  padding: 24px;
-  position: sticky;
-  top: 96px;
-}
-
-.houseboat-price-display {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 24px;
+background: #fff;
+border-radius: 16px;
+padding: 30px;
+box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+position: sticky;
+top: 100px;
 }
 
 .houseboat-price-amount {
-  font-size: 32px;
-  font-weight: 700;
-}
-
-.houseboat-price-label {
-  color: #6b7280;
-}
-
-.houseboat-form-group {
-  margin-bottom: 16px;
-  min-width: 0;
-}
-
-.houseboat-form-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  color: #374151;
-  margin-bottom: 8px;
+font-size: 32px;
+font-weight: 800;
+color: #111827;
 }
 
 .houseboat-form-input {
-  width: 100%;
-  max-width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
-}
-
-.houseboat-form-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.houseboat-price-breakdown {
-  margin-bottom: 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.houseboat-price-row {
-  display: flex;
-  justify-content: space-between;
-  color: #4b5563;
-  margin-bottom: 12px;
-}
-
-.houseboat-price-total {
-  display: flex;
-  justify-content: space-between;
-  font-size: 18px;
-  font-weight: 700;
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
+width: 100%;
+padding: 14px;
+margin-top: 10px;
+border: 1px solid #d1d5db;
+border-radius: 10px;
+font-size: 16px;
 }
 
 .houseboat-book-btn {
-  width: 100%;
-  padding: 16px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+width: 100%;
+padding: 18px;
+border-radius: 12px;
+font-size: 18px;
+font-weight: 700;
+border: none;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+cursor: pointer;
+margin-top: 20px;
 }
 
 .houseboat-book-btn-active {
-  background: linear-gradient(135deg, #0ea500, #029e31);
-  color: white;
+background: #25d366;
+color: #fff;
 }
 
-.houseboat-book-btn-active:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 167, 42, 0.5);
-}
-
-.houseboat-book-btn-disabled {
-  background: #d1d5db;
-  color: #9ca3af;
-  cursor: not-allowed;
-}
-
-.houseboat-book-disclaimer {
-  text-align: center;
-  font-size: 14px;
-  color: #6b7280;
-  margin-top: 16px;
-}
-
-.houseboat-icon-inline {
-  display: inline;
-  margin-right: 6px;
-  vertical-align: middle;
-  color: #4b5563;
+@media (max-width: 768px) {
+.houseboat-image-gallery { height: 300px; }
+.houseboat-booking-card { position: relative; top: 0; }
 }
