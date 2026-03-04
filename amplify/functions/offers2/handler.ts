@@ -1,94 +1,124 @@
-
-const { google } = require("googleapis");
+import type {
+  APIGatewayProxyHandler,
+  APIGatewayProxyResult,
+} from "aws-lambda";
+import { google } from "googleapis";
 
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
+const GOOGLE_CREDENTIALS_JSON =
+  process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON;
 
 async function getSheetsClient() {
-  const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
+  if (!GOOGLE_CREDENTIALS_JSON) {
+    throw new Error("Missing GOOGLE_APPLICATION_CREDENTIALS_JSON");
+  }
+
+  const credentials = JSON.parse(GOOGLE_CREDENTIALS_JSON);
+
   const auth = new google.auth.GoogleAuth({
     credentials,
     scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
   });
+
   const client = await auth.getClient();
-  return google.sheets({ version: "v4", auth: client });
+
+  return google.sheets({
+    version: "v4",
+    auth: client as any,
+  });
 }
 
-function rowsToObjects(rows) {
+function rowsToObjects(rows: string[][]): Record<string, unknown>[] {
   if (!rows || rows.length === 0) return [];
+
   const headers = rows[0];
   const dataRows = rows.slice(1);
-  return dataRows.map(r => {
-    const obj = {};
+
+  return dataRows.map((r) => {
+    const obj: Record<string, unknown> = {};
+
     headers.forEach((h, i) => {
-      let value = r[i] !== undefined ? r[i] : "";
-      
-      // ✅ CLEAN IMAGE URLS - Remove markdown [text](url)
+      let value: unknown = r[i] !== undefined ? r[i] : "";
+
+      // Clean markdown image format: [text](url)
       if (h === "image" && typeof value === "string") {
-        const urlMatch = value.match(/\\[(.*?)\\]\\((.*?)\\)/);
+        const urlMatch = value.match(/\[(.*?)\]\((.*?)\)/);
         if (urlMatch) {
-          value = urlMatch[2]; // Extract URL from markdown
+          value = urlMatch[2];
         }
       }
-      
+
       obj[h] = value;
     });
-    
-    // Number conversions
-    if (obj.price !== undefined && obj.price !== "") {
-      const n = Number(obj.price);
-      obj.price = isNaN(n) ? obj.price : n;
-    }
-    if (obj.id !== undefined && obj.id !== "") {
-      const n = Number(obj.id);
-      obj.id = isNaN(n) ? obj.id : n;
-    }
-    if (obj.rating !== undefined && obj.rating !== "") {
-      const n = Number(obj.rating);
-      obj.rating = isNaN(n) ? obj.rating : n;
-    }
-    if (obj.reviews !== undefined && obj.reviews !== "") {
-      const n = Number(obj.reviews);
-      obj.reviews = isNaN(n) ? obj.reviews : n;
-    }
+
+    // Convert numeric fields safely
+    ["price", "id", "rating", "reviews"].forEach((field) => {
+      const val = obj[field];
+      if (val !== undefined && val !== "") {
+        const n = Number(val);
+        obj[field] = isNaN(n) ? val : n;
+      }
+    });
+
     return obj;
   });
 }
 
-exports.handler = async function (event, context) {
+export const handler: APIGatewayProxyHandler = async (
+  event
+): Promise<APIGatewayProxyResult> => {
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
-      headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,OPTIONS" },
+      headers: corsHeaders,
       body: "",
     };
   }
 
   if (event.httpMethod !== "GET") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return {
+      statusCode: 405,
+      headers: corsHeaders,
+      body: "Method Not Allowed",
+    };
   }
 
   try {
+    if (!SPREADSHEET_ID) {
+      throw new Error("Missing SPREADSHEET_ID");
+    }
+
     const sheets = await getSheetsClient();
-    const range = "offers2";
+
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range,
+      range: "offers2",
     });
-    const rows = response.data.values || [];
+
+    const rows = (response.data.values || []) as string[][];
     const offers = rowsToObjects(rows);
 
     return {
       statusCode: 200,
-      headers: { "Access-Control-Allow-Origin": "*" },
+      headers: corsHeaders,
       body: JSON.stringify({ offers }),
     };
-  } catch (err) {
-    console.error("Error reading offers2 sheet:", err);
+  } catch (error) {
+    const err = error as Error;
+
     return {
       statusCode: 500,
-      headers: { "Access-Control-Allow-Origin": "*" },
-      body: JSON.stringify({ error: "Error reading offers2 sheet", details: String(err) }),
+      headers: corsHeaders,
+      body: JSON.stringify({
+        error: "Error reading offers2 sheet",
+        details: err.message,
+      }),
     };
   }
 };
-

@@ -25,3 +25,22 @@ frontend:
     paths:
       - .npm/**/*
       - node_modules/**/*
+  customHeaders:
+    - pattern: '/alpy.html'
+      headers:
+        - key: 'Cache-Control'
+          value: 'no-cache'
+    - pattern: '/munnar.html'
+      headers:
+        - key: 'Cache-Control'
+          value: 'no-cache'
+redirects:
+  - source: /alpy.html
+    target: /alpy.html
+    status: '200'
+  - source: /munnar.html
+    target: /munnar.html
+    status: '200'
+  - source: '</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>'
+    target: /index.html
+    status: '404-200'

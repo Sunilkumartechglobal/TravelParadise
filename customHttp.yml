@@ -1,0 +1,10 @@
+customHeaders:
+  - pattern: '/alpy.html'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+  - pattern: '/munnar.html'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache'
+
