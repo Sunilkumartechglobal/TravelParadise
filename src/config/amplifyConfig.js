@@ -2,9 +2,9 @@ import { Amplify } from 'aws-amplify';
 
 let outputs = {};
 
-// Try to load amplify_outputs.json (generated after deployment)
+//npm  Try to load amplify_outputs.json (generated after deployment)
 try {
-  outputs = require('../amplify_outputs.json');
+//  outputs = require('../amplify_outputs.json');
   // Configure Amplify with the outputs
   Amplify.configure(outputs);
 } catch (e) {

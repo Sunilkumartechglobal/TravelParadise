@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munnar & Alleppey - Tourism Paradise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2d5a27;
+            --accent-gold: #c5a059;
+            --light-bg: #f4f7f6;
+            --dark-text: #333;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1590548366587-27a05296822e?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; max-width: 800px; }
+
+        /* Navigation Links */
+        .nav-bar {
+            background: var(--white);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            color: var(--primary-green);
+            border-left: 5px solid var(--accent-gold);
+            padding-left: 15px;
+            margin: 40px 0 20px;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .card h3 { color: var(--primary-green); margin-bottom: 10px; }
+        .card ul { list-style: none; }
+        .card ul li { margin-bottom: 8px; display: flex; align-items: center; }
+        .card ul li i { color: var(--accent-gold); margin-right: 10px; width: 20px; }
+
+        /* Highlight Section */
+        .history-box {
+            background: var(--primary-green);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        /* Quick Links / Buttons */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-link {
+            background: var(--white);
+            border: 1px solid var(--primary-green);
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--primary-green);
+            border-radius: 5px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .btn-link:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>MUNNAR</h1>
+        <p>The Kashmir of South India • Vast Tea Plantations • Misty Mountains</p>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="#history">History</a>
+        <a href="#sightseeing">Sightseeing</a>
+        <a href="#distance">Travel Log</a>
+        <a href="#services">Local Services</a>
+        <a href="#hotels">Hotels & Houseboats</a>
+    </nav>
+
+    <div class="container">
+        
+        <section id="history" class="history-box">
+            <h2>Heritage & Origins</h2>
+            <p>Once a wilderness inhabited by the Muthuvan tribes, Munnar was transformed into a tea hub starting in 1877. From John Daniel Munro's first lease to the establishment of the Kannan Devan Hills Produce Company, the legacy of tea is etched into every hill.</p>
+            <div class="btn-grid" style="margin-top:20px">
+                <span class="btn-link">Tea Museum (Closed Mondays)</span>
+                <span class="btn-link">Marayoor Dolmens</span>
+                <span class="btn-link">Colonial Architecture</span>
+            </div>
+        </section>
+
+        <section id="sightseeing">
+            <h2>Top Attractions</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fa-solid fa-mountain"></i> Nature & Parks</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Eravikulam National Park (Nilgiri Tahr)</li>
+                        <li><i class="fa-solid fa-check"></i> Mattupetty Dam & Lake</li>
+                        <li><i class="fa-solid fa-check"></i> Top Station (1,700m Views)</li>
+                        <li><i class="fa-solid fa-check"></i> Echo Point</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-leaf"></i> Tea & Culture</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Tata Tea Museum</li>
+                        <li><i class="fa-solid fa-check"></i> Kolukkumalai Estate (World's Highest)</li>
+                        <li><i class="fa-solid fa-check"></i> Spice Garden Tours</li>
+                        <li><i class="fa-solid fa-check"></i> Marayoor Sandalwood Forest</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2>Essential Local Services</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fa-solid fa-taxi"></i> Taxi & Transport</h3>
+                    <div class="btn-grid">
+                        <a href="#" class="btn-link">Sightseeing Tours</a>
+                        <a href="#" class="btn-link">Pick up & Drop</a>
+                        <a href="#" class="btn-link">Trekking Packages</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-utensils"></i> Food & Dining</h3>
+                    <div class="btn-grid">
+                        <a href="#" class="btn-link">Veg/Non-Veg</a>
+                        <a href="#" class="btn-link">Homely Meals</a>
+                        <a href="#" class="btn-link">Sea Food</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hotels">
+            <h2>Hotels & Houseboats</h2>
+            <p style="margin-bottom:20px;">We offer diverse meal plans: <strong>CP (Breakfast), EP (Room Only), MAP (Half Board), API (Full Board)</strong>.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fa-solid fa-ship"></i> Alleppey Experience</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-star"></i> Luxury Houseboats</li>
+                        <li><i class="fa-solid fa-star"></i> Shikara Rides</li>
+                        <li><i class="fa-solid fa-star"></i> Bamboo Rafting</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-hotel"></i> Munnar Stays</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-hotel"></i> 5-Star Luxury Resorts</li>
+                        <li><i class="fa-solid fa-tree"></i> Tree Houses & Cave Houses</li>
+                        <li><i class="fa-solid fa-campground"></i> Tent & Bamboo Houses</li>
+                        <li><i class="fa-solid fa-wallet"></i> Budget Dormitories</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="distance">
+            <h2>Travel Guide</h2>
+            <div class="card">
+                <p><strong>Nearest Airport:</strong> Cochin International (125 km)</p>
+                <p><strong>Nearest Rail:</strong> Aluva (110 km) / Ernakulam (126 km)</p>
+                <hr style="margin:15px 0; border:0; border-top:1px solid #eee;">
+                <p><strong>Pro Tip:</strong> Eravikulam Park is closed Feb-mid to April-mid for breeding season.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Tourism Paradise. All rights reserved.</p>
+        <a href="/" class="back-home"><i class="fa-solid fa-house"></i> Back to Home Page</a>
+    </footer>
+
+</body>
+</html>

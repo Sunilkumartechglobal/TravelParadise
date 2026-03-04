@@ -1,58 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './HouseboatsList.css';
 
 
 const dummyHouseboats = [
-  { id: 1, titleKey: 'houseboatsHotelsInAlleppeyAlappuzhaKerala' },
-  { id: 2, titleKey: 'houseboatsHotelsInMunnar' },
-  { id: 3, titleKey: 'houseboatsHotelsInCochin' },
-  { id: 4, titleKey: 'houseboatsHotelsInKumarakomLake' },
-  { id: 5, titleKey: 'houseboatsHotelsInKottayam' },
-  { id: 6, titleKey: 'houseboatsHotelsInAlleppey' },
-  { id: 7, titleKey: 'houseboatsHotelsInChottanikara' },
-  { id: 8, titleKey: 'houseboatsHotelsInThiruvananthapuram' },
-  { id: 9, titleKey: 'houseboatsHotelsInKovalamBeach' },
-  { id: 10, titleKey: 'houseboatsHotelsInThekkady' },
-  { id: 11, titleKey: 'houseboatsHotelsInWayanad' },
-  { id: 12, titleKey: 'houseboatsHotelsInAlappuzha' },
-  { id: 13, titleKey: 'houseboatsHotelsInGuruvayur' },
-  { id: 14, titleKey: 'houseboatsHotelsInVagamon' },
-  { id: 15, titleKey: 'houseboatsHotelsInAthirapillyWaterFalls' },
-  { id: 16, titleKey: 'houseboatsHotelsInMarariBeach' },
-  { id: 17, titleKey: 'houseboatsHotelsInPoovarBeach' },
-  { id: 18, titleKey: 'houseboatsHotelsInVarkalaBeach' },
-  { id: 19, titleKey: 'houseboatsHotelsInAshtamudiLake' },
-  { id: 20, titleKey: 'houseboatsHotelsInKanyakumariBeach' },
-  { id: 21, titleKey: 'houseboatsHotelsInAlleppeyBeach' },
-  { id: 22, titleKey: 'houseboatsHotelsInAlappuzhaLake' },
-  { id: 23, titleKey: 'houseboatsHotelsInIndia' },
-  { id: 24, titleKey: 'houseboatsHotelsInKerala' },
-  { id: 25, titleKey: 'houseBoatHotelsInAlleppey' },
-  { id: 26, titleKey: 'boatHouseHotelsInIndia' },
-  { id: 27, titleKey: 'boatHouseHotelsInKerala' },
-  { id: 28, titleKey: 'sharingHouseboatsHotelsInAlleppey' },
-  { id: 29, titleKey: 'sharingBoatHouseHotelsInKerala' },
-  { id: 30, titleKey: 'dayTripHouseboatsHotelsInAlleppey' },
-  { id: 31, titleKey: 'dayCruiseHouseboatsHotelsInAlleppey' },
-  { id: 32, titleKey: 'sharingHouseboatsHotelsInAlleppey' },
-  { id: 33, titleKey: 'fiveStarHouseboatsHotelsInAlleppey' },
-  { id: 34, titleKey: 'fourStarHouseboatsHotelsInAlleppey' },
-  { id: 35, titleKey: 'threeStarHouseboatsHotelsInAlleppey' },
-  { id: 36, titleKey: 'twoStarHouseboatsHotelsInAlleppey' },
-  { id: 37, titleKey: 'budgetHouseboatsHotelsInAlleppey' },
-  { id: 38, titleKey: 'standardBoatHouseHotelsInAlleppey' },
+  { id: 1, titleKey: 'House Boats Hotels In Alleppey Alappuzha Kerala' },
+  { id: 2, titleKey: 'House Boats Hotels in Munnar' },
+  { id: 3, titleKey: 'House Boats Hotels in Cochin' },
+  { id: 4, titleKey: 'House Boats Hotels in KumarakomLake' },
+  { id: 5, titleKey: 'House Boats Hotels in Kottayam' },
+  { id: 6, titleKey: 'House Boats Hotels in Alleppey' },
+  { id: 7, titleKey: 'House Boats Hotels in Chottanikara' },
+  { id: 8, titleKey: 'House Boats Hotels in Thiruvananthapuram' },
+  { id: 9, titleKey: 'House Boats Hotels in KovalamBeach' },
+  { id: 10, titleKey: 'House Boats Hotels in Thekkady' },
+  { id: 11, titleKey: 'House Boats Hotels in Wayanad' },
+  { id: 12, titleKey: 'House Boats Hotels in Alappuzha' },
+  { id: 13, titleKey: 'House Boats Hotels in Guruvayur' },
+  { id: 14, titleKey: 'House Boats Hotels in Vagamon' },
+  { id: 15, titleKey: 'House Boats Hotels in AthirapillyWaterFalls' },
+  { id: 16, titleKey: 'House Boats Hotels in Marari Beach' },
+  { id: 17, titleKey: 'House Boats Hotels in Poovar Beach' },
+  { id: 18, titleKey: 'House Boats Hotels in Varkala Beach' },
+  { id: 19, titleKey: 'House Boats Hotels in Ashtamudi Lake' },
+  { id: 20, titleKey: 'House Boats Hotels in Kanyakumari Beach' },
+  { id: 21, titleKey: 'House Boats Hotels in Alleppey Beach' },
+  { id: 22, titleKey: 'House Boats Hotels in Alappuzha Lake' },
+  { id: 23, titleKey: 'House Boats Hotels in India' },
+  { id: 24, titleKey: 'House Boats Hotels in Kerala' },
+  { id: 25, titleKey: 'House Boat Hotels in Alleppey' },
+  { id: 26, titleKey: 'Boat House Hotels in India' },
+  { id: 27, titleKey: 'Boat House Hotels in Kerala' },
+  { id: 28, titleKey: 'Sharing Houseboats Hotels in Alleppey' },
+  { id: 29, titleKey: 'Sharing Boat House Hotels in Kerala' },
+  { id: 30, titleKey: 'Day Trip House Boats Hotels in Alleppey' },
+  { id: 31, titleKey: 'Day Cruise House Boats Hotels in Alleppey' },
+  { id: 32, titleKey: 'Sharing House Boats Hotels in Alleppey' },
+  { id: 33, titleKey: 'Five Star Houseboats Hotels in Alleppey' },
+  { id: 34, titleKey: 'Four Star Houseboats Hotels in Alleppey' },
+  { id: 35, titleKey: 'Three Star Houseboats Hotels in Alleppey' },
+  { id: 36, titleKey: 'TwoStar Houseboats Hotels in Alleppey' },
+  { id: 37, titleKey: 'Budget Houseboats Hotels in Alleppey' },
+  { id: 38, titleKey: 'Standard BoatHouse Hotels in Alleppey' },
 ];
 
 const HouseboatsList = () => {
-  const [houseboats, setHouseboats] = useState(dummyHouseboats);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [houseboats] = useState(dummyHouseboats);
+  const [searchTerm] = useState('');
   const { t } = useTranslation(['houseboatList', 'translation']);
-   const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   // Fetch houseboats from backend
   // useEffect(() => {
@@ -75,9 +72,31 @@ const HouseboatsList = () => {
   const filteredHouseboats = houseboats.filter(boat =>
     t(boat.titleKey, { ns: 'houseboatList' }).toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   const handleCardClick = (boat) => {
+    const key = boat.titleKey.toLowerCase();
+
+    // Alleppey / Alappuzha -> alpy.html (opens in new tab)
+    const isAlpy =
+      key.includes('alleppey') ||
+      key.includes('alappuzha') ||
+      key.includes('alpy');
+
+    // Munnar -> munnar.html (opens in new tab)
+    const isMunnar = key.includes('munnar');
+
+    if (isAlpy) {
+      window.open('/alpy.html', '_blank');
+      return;
+    }
+    if (isMunnar) {
+      window.open('/munnar.html', '_blank');
+      return;
+    }
+
+    // All other cards -> existing destination feed
     const translatedTitle = t(boat.titleKey, { ns: 'houseboatList' });
-    navigate(`/destinationfeed`, { state: { selectedOffer: { title: translatedTitle } } });
+    navigate('/destinationfeed', { state: { selectedOffer: { title: translatedTitle } } });
   };
 
   return (
@@ -95,7 +114,6 @@ const HouseboatsList = () => {
           {t('houseboats', { ns: 'translation' })}
         </h1>
       </div>
-
 
       {/* Results */}
       <div className="houseboats-results-grid">

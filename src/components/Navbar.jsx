@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { ChevronDown, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';  // Add this import
 import './Navbar.css';
@@ -62,11 +62,11 @@ const Navbar = () => {
     return () => i18n.off('languageChanged', handleLanguageChanged);
   }, [i18n]);
 
-  const handleLangChange = (langCode) => {
-    i18n.changeLanguage(langCode);  // Change language using i18n
+  const handleLangChange = useCallback((langCode) => {
+    i18n.changeLanguage(langCode);
     setIsDropdownOpen(false);
-    localStorage.setItem('app:lang', langCode);  // Persist choice
-  };
+    localStorage.setItem('app:lang', langCode);
+  }, [i18n]);
 
   // Load persisted language on mount
   useEffect(() => {
@@ -74,7 +74,7 @@ const Navbar = () => {
     if (savedLang && SUPPORTED_LANGS.some(l => l.code === savedLang)) {
       handleLangChange(savedLang);
     }
-  }, []);
+  }, [handleLangChange]);
 
   const getCurrentLang = () => SUPPORTED_LANGS.find(l => l.code === lang) || SUPPORTED_LANGS[0];
 

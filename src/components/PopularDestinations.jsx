@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './PopularDestinations.css';
@@ -13,7 +13,7 @@ const PopularDestinations = () => {
     'northIndia', 'southIndia', 'eastIndia', 'centralIndia'
   ];
 
-  const destinations = {
+  const destinations = useMemo(() => ({
     'northIndia': [
       {
         id: 1,
@@ -663,7 +663,7 @@ const PopularDestinations = () => {
         email: 'bhimbetka.tourism@example.com'
       },
     ],
-  };
+  }), [t]);
 
   useEffect(() => {
     setVisibleCards([]);
@@ -675,7 +675,7 @@ const PopularDestinations = () => {
       });
     }, 300);
     return () => clearTimeout(timer);
-  }, [selectedContinent]);
+  }, [selectedContinent, destinations]);
 
   const handleCardClick = (destination) => {
     const translatedDestination = {

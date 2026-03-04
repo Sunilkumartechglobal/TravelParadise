@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alleppey Houseboats & Hotels - Tourism Paradise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1a5276;
+            --accent-orange: #e67e22;
+            --light-bg: #f0f4f8;
+            --dark-text: #2c3e50;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 { font-size: 3.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.3rem; font-style: italic; }
+
+        /* Sticky Nav */
+        .nav-bar {
+            background: var(--white);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            color: var(--primary-blue);
+            border-bottom: 3px solid var(--accent-orange);
+            display: inline-block;
+            margin: 40px 0 20px;
+            padding-bottom: 5px;
+        }
+
+        /* History & Intro */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .history-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 8px solid var(--primary-blue);
+        }
+
+        /* Stats/Info Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .card h3 { color: var(--primary-blue); margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card ul { list-style: none; }
+        .card li { margin-bottom: 10px; font-size: 0.95rem; display: flex; align-items: flex-start; }
+        .card li i { color: var(--accent-orange); margin-right: 12px; margin-top: 5px; }
+
+        /* Travel Table */
+        .travel-info {
+            background: #e1eaf0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Button Links */
+        .btn-link {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .btn-link:hover { background: var(--accent-orange); }
+
+        .tag {
+            display: inline-block;
+            background: #eee;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin: 3px;
+            color: #555;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #999;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-nav a {
+            color: var(--accent-orange);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .intro-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>ALAPPUZHA</h1>
+        <p>The Venice of the East • Gateway to the Backwaters</p>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="#history">Heritage</a>
+        <a href="#transport">Connectivity</a>
+        <a href="#houseboats">Houseboats</a>
+        <a href="#services">Local Guide</a>
+        <a href="/munnar.html">Visit Munnar</a>
+    </nav>
+
+    <div class="container">
+        
+        <section id="history" class="intro-grid">
+            <div class="history-card">
+                <h2>Ancient Heritage</h2>
+                <p>Founded in 1762 by Diwan Raja Kesavadas, Alleppey is a masterpiece of canals and maritime trade. Known to the Romans as 'Baraces', it remains the heart of Kerala’s spice trade and backwater culture.</p>
+                <div style="margin-top: 15px;">
+                    <span class="tag">Alappuzha Lighthouse (1862)</span>
+                    <span class="tag">Mannarasala Temple</span>
+                    <span class="tag">Kuttanad Region</span>
+                </div>
+            </div>
+            <div class="card" style="background: var(--primary-blue); color: white;">
+                <h3 style="color: white; border-color: rgba(255,255,255,0.2);">Quick Access</h3>
+                <p><i class="fa-solid fa-plane"></i> Cochin Airport: 78 KM</p>
+                <p><i class="fa-solid fa-train"></i> Railway Station: 4 KM from City</p>
+                <p><i class="fa-solid fa-bus"></i> KSRTC: Near Water Transport HQ</p>
+            </div>
+        </section>
+
+        <section id="transport">
+            <h2>Infrastructure & Transport</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fa-solid fa-road"></i> Highway Connectivity</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-check"></i> <strong>NH 66:</strong> Connects Mumbai to Kanyakumari.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> <strong>AC Road (SH 11):</strong> Linking Alappuzha to Changanassery (24.2 KM).</li>
+                        <li><i class="fa-solid fa-circle-check"></i> <strong>SH 40:</strong> Interstate highway to Madurai.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-train-subway"></i> Rail & Boarding</h3>
+                    <div class="travel-info">
+                        <p><strong>Station to Houseboat Point:</strong></p>
+                        <p><i class="fa-solid fa-location-dot"></i> Location: Finishing Point</p>
+                        <p><i class="fa-solid fa-clock"></i> Time: 20 Mins (6.1 KM)</p>
+                        <p><i class="fa-solid fa-rupee-sign"></i> Auto: Min ₹200 | Bus: ₹30</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="houseboats">
+            <h2>Houseboats & Accommodations</h2>
+            <p>We provide exclusive <strong>B2B Tariffs</strong> with flexible meal plans: <strong>API, MAP, CP, and EP</strong>.</p>
+            <div class="grid" style="margin-top:20px;">
+                <div class="card">
+                    <h3><i class="fa-solid fa-ship"></i> Cruise Types</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-anchor"></i> Private & Shared Houseboats</li>
+                        <li><i class="fa-solid fa-anchor"></i> Full Day Trips & Overnight Stay</li>
+                        <li><i class="fa-solid fa-anchor"></i> Sunset Day Cruises</li>
+                        <li><i class="fa-solid fa-anchor"></i> Luxury 5-Star Boats</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-bed"></i> Hotel Categories</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-star"></i> Beachfront Resorts</li>
+                        <li><i class="fa-solid fa-star"></i> Lakeside Heritage Hotels</li>
+                        <li><i class="fa-solid fa-star"></i> Budget & Standard Boat Houses</li>
+                        <li><i class="fa-solid fa-star"></i> 2-star to 5-star Accommodations</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2>Local Services & Guide</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fa-solid fa-taxi"></i> Online Taxi</h3>
+                    <div class="btn-grid">
+                        <a href="#" class="btn-link">Pickup/Drop</a>
+                        <a href="#" class="btn-link">Sightseeing</a>
+                        <a href="#" class="btn-link">Package Tours</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-bowl-food"></i> Dining Near Me</h3>
+                    <div class="btn-grid">
+                        <a href="#" class="btn-link">Sea Food</a>
+                        <a href="#" class="btn-link">Homely Meals</a>
+                        <a href="#" class="btn-link">Wedding Biriyani</a>
+                        <a href="#" class="btn-link">Pure Veg</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Explore More</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fa-solid fa-wheat-awn"></i> Farming & Visits</h3>
+                    <p>Experience Traditional Farming, Kuttanad Cultivations, and Factory/Farm visits.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-gopuram"></i> Pilgrimage</h3>
+                    <p>Visit historic temples and churches reflecting the deep spiritual roots of Alappuzha.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-nav">
+            <a href="/">Home</a>
+            <a href="/munnar.html">Munnar Guide</a>
+            <a href="#top">Back to Top</a>
+        </div>
+        <p style="margin-top: 20px;">&copy; 2026 Tourism Paradise. Designed for Alappuzha Tourism.</p>
+    </footer>
+
+</body>
+</html>

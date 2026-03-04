@@ -1,5 +1,5 @@
 import React from "react";
-import { FaPhoneAlt, FaShip, FaGlobeAsia, FaUmbrellaBeach, FaSpa, FaMapMarkedAlt } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
 import "./AboutPage.css";
 
 const AboutPage = () => {

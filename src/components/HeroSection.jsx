@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   FaPlane, FaHotel, FaTrain, FaBus, FaShip, FaCar,
-  FaUmbrellaBeach, FaMountain, FaCompass, FaGlobeAmericas,
-  FaCamera, FaUmbrella, FaTicketAlt, FaCalendarAlt,
-  FaSun, FaHome, FaWallet, FaBicycle, FaCity, FaAnchor ,FaUtensils,FaLandmark,FaCampground
+  FaUmbrellaBeach, FaMountain, FaCompass,
+  FaCamera, FaCalendarAlt,
+  FaSun, FaHome, FaWallet, FaBicycle, FaAnchor, FaUtensils
 } from "react-icons/fa";
-import { Fish, Home, Box, Scissors, Anchor, ImageIcon } from "lucide-react";
+import { Fish, Home, Box, Scissors, Anchor } from "lucide-react";
 import { FaSailboat } from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
-import HouseboatsCarousel from './OffersCarousel';
 import './HeroSection.css';
 
 const categories = [
@@ -57,10 +56,6 @@ export default function HeroSection() {
     }
   };
 
-  const handleDealsClick = () => {
-    navigate('/deals');
-  };
-
   const handleExploreClick = () => {
   navigate('/destinationfeed');
 };
@@ -69,7 +64,7 @@ export default function HeroSection() {
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-container">
         <div className={`cards-container ${isVisible ? 'animate-in' : ''}`}>
-          <ul className="card-grid" role="list">
+          <ul className="card-grid">
             {categories.map((category, index) => {
               const Icon = category.icon;
               return (

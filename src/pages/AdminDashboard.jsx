@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { API_ROUTES } from '../config/amplifyConfig';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -38,7 +37,7 @@ const AdminDashboard = () => {
   const fetchOffers = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(API_ROUTES.adminOffers, {
+      const res = await axios.get('/.netlify/functions/adminOffers', {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -112,14 +111,14 @@ const AdminDashboard = () => {
     try {
       if (editMode) {
         // Update existing - maintain column order
-        await axios.put(API_ROUTES.adminOffers, 
+        await axios.put('/.netlify/functions/adminOffers', 
           { ...currentOffer, rowIndex },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         alert('Offer updated successfully!');
       } else {
         // Add new - maintain column order
-        await axios.post(API_ROUTES.adminOffers,
+        await axios.post('/.netlify/functions/adminOffers',
           currentOffer,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -138,7 +137,7 @@ const AdminDashboard = () => {
     if (!window.confirm(`Delete "${offer.title}"?`)) return;
     
     try {
-      await axios.delete(API_ROUTES.adminOffers, {
+      await axios.delete('/.netlify/functions/adminOffers', {
         headers: { Authorization: `Bearer ${token}` },
         data: { rowIndex: offer.rowIndex }
       });

@@ -1,0 +1,6 @@
+@echo off
+echo Clearing webpack cache...
+rd /s /q "node_modules\.cache"
+echo Cache cleared successfully!
+echo Starting npm...
+npm start

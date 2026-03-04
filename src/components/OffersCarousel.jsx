@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './OffersCarousel.css';
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { API_ROUTES } from '../config/amplifyConfig';
 
 const dummyOffers = [
   {
@@ -189,7 +187,7 @@ const OffersGrid = () => {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const res = await axios.get(API_ROUTES.offers2);
+        const res = await axios.get('/.netlify/functions/offers2');
         const data = res.data;
 
         if (data && Array.isArray(data.offers) && data.offers.length > 0) {

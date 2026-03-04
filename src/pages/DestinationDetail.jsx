@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaArrowLeft, FaClock, FaInfoCircle } from 'react-icons/fa';
+import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import './DestinationDetails.css';
 
 const DestinationDetails = () => {
