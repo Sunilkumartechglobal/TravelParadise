@@ -37,7 +37,7 @@ const AdminDashboard = () => {
   const fetchOffers = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('/.netlify/functions/adminOffers', {
+      const res = await axios.get(process.env.REACT_APP_ADMIN_API_URL, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -111,14 +111,14 @@ const AdminDashboard = () => {
     try {
       if (editMode) {
         // Update existing - maintain column order
-        await axios.put('/.netlify/functions/adminOffers', 
+        await axios.put(process.env.REACT_APP_ADMIN_API_URL, 
           { ...currentOffer, rowIndex },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         alert('Offer updated successfully!');
       } else {
         // Add new - maintain column order
-        await axios.post('/.netlify/functions/adminOffers',
+        await axios.post(process.env.REACT_APP_ADMIN_API_URL,
           currentOffer,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
     if (!window.confirm(`Delete "${offer.title}"?`)) return;
     
     try {
-      await axios.delete('/.netlify/functions/adminOffers', {
+      await axios.delete(process.env.REACT_APP_ADMIN_API_URL, {
         headers: { Authorization: `Bearer ${token}` },
         data: { rowIndex: offer.rowIndex }
       });

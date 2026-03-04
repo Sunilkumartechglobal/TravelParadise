@@ -1,28 +1,25 @@
-import type { APIGatewayProxyHandler } from 'aws-lambda';
-import { google } from 'googleapis';
+const { google } = require('googleapis');
 
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
 async function getSheetsClient() {
-  const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || '{}');
+  const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
 
   const auth = new google.auth.GoogleAuth({
     credentials,
-    // Use read-only scope for safety since this is a public fetch function
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
 
   const client = await auth.getClient();
-  // Using 'as any' here ensures compatibility with the latest googleapis types
-  return google.sheets({ version: 'v4', auth: client as any });
+  return google.sheets({ version: 'v4', auth: client });
 }
 
-function rowsToObjects(rows: string[][]) {
+function rowsToObjects(rows) {
   if (!rows || rows.length === 0) return [];
   const headers = rows[0];
   const dataRows = rows.slice(1);
   return dataRows.map(r => {
-    const obj: Record<string, string | number> = {};
+    const obj = {};
     headers.forEach((h, i) => {
       obj[h] = r[i] !== undefined ? r[i] : '';
     });
@@ -38,42 +35,39 @@ function rowsToObjects(rows: string[][]) {
   });
 }
 
-export const handler: APIGatewayProxyHandler = async (event) => {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS',
-  };
-
+exports.handler = async function (event, context) {
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers, body: '' };
+    return {
+      statusCode: 200,
+      headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,OPTIONS' },
+      body: '',
+    };
   }
 
   if (event.httpMethod !== 'GET') {
-    return { statusCode: 405, headers, body: 'Method Not Allowed' };
+    return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
   try {
     const sheets = await getSheetsClient();
-    const range = 'offers'; 
+    const range = 'offers'; // tab name
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
       range,
     });
-    
-    const rows = (response.data.values || []) as string[][];
+    const rows = response.data.values || [];
     const offers = rowsToObjects(rows);
 
     return {
       statusCode: 200,
-      headers,
+      headers: { 'Access-Control-Allow-Origin': '*' },
       body: JSON.stringify({ offers }),
     };
   } catch (err) {
     console.error('Error reading offers sheet:', err);
     return {
       statusCode: 500,
-      headers,
+      headers: { 'Access-Control-Allow-Origin': '*' },
       body: JSON.stringify({ error: 'Error reading offers sheet', details: String(err) }),
     };
   }
