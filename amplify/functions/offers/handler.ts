@@ -8,10 +8,12 @@ async function getSheetsClient() {
 
   const auth = new google.auth.GoogleAuth({
     credentials,
+    // Use read-only scope for safety since this is a public fetch function
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
 
   const client = await auth.getClient();
+  // Using 'as any' here ensures compatibility with the latest googleapis types
   return google.sheets({ version: 'v4', auth: client as any });
 }
 
@@ -44,11 +46,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
   };
 
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: '',
-    };
+    return { statusCode: 200, headers, body: '' };
   }
 
   if (event.httpMethod !== 'GET') {
@@ -57,11 +55,12 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
   try {
     const sheets = await getSheetsClient();
-    const range = 'offers'; // tab name
+    const range = 'offers'; 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
       range,
     });
+    
     const rows = (response.data.values || []) as string[][];
     const offers = rowsToObjects(rows);
 

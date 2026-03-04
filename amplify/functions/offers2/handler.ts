@@ -10,6 +10,7 @@ async function getSheetsClient() {
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
   const client = await auth.getClient();
+  // Using 'as any' prevents strict type conflicts during the AWS build
   return google.sheets({ version: 'v4', auth: client as any });
 }
 
@@ -26,30 +27,21 @@ function rowsToObjects(rows: string[][]) {
       if (h === 'image' && typeof value === 'string') {
         const urlMatch = value.match(/\[(.*?)\]\((.*?)\)/);
         if (urlMatch) {
-          value = urlMatch[2]; // Extract URL from markdown
+          value = urlMatch[2];
         }
       }
-
       obj[h] = value;
     });
 
-    // Number conversions
-    if (obj.price !== undefined && obj.price !== '') {
-      const n = Number(obj.price);
-      obj.price = isNaN(n) ? obj.price : n;
-    }
-    if (obj.id !== undefined && obj.id !== '') {
-      const n = Number(obj.id);
-      obj.id = isNaN(n) ? obj.id : n;
-    }
-    if (obj.rating !== undefined && obj.rating !== '') {
-      const n = Number(obj.rating);
-      obj.rating = isNaN(n) ? obj.rating : n;
-    }
-    if (obj.reviews !== undefined && obj.reviews !== '') {
-      const n = Number(obj.reviews);
-      obj.reviews = isNaN(n) ? obj.reviews : n;
-    }
+    // Consistent number conversions
+    const numericFields = ['price', 'id', 'rating', 'reviews'];
+    numericFields.forEach(field => {
+      if (obj[field] !== undefined && obj[field] !== '') {
+        const n = Number(obj[field]);
+        obj[field] = isNaN(n) ? obj[field] : n;
+      }
+    });
+    
     return obj;
   });
 }
@@ -61,25 +53,17 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
   };
 
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: '',
-    };
-  }
-
-  if (event.httpMethod !== 'GET') {
-    return { statusCode: 405, headers, body: 'Method Not Allowed' };
-  }
+  if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
+  if (event.httpMethod !== 'GET') return { statusCode: 405, headers, body: 'Method Not Allowed' };
 
   try {
     const sheets = await getSheetsClient();
-    const range = 'offers2';
+    const range = 'offers2'; 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
       range,
     });
+    
     const rows = (response.data.values || []) as string[][];
     const offers = rowsToObjects(rows);
 

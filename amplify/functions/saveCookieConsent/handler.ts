@@ -10,11 +10,11 @@ async function getSheetsClient() {
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
   const client = await auth.getClient();
+  // 'as any' is used to satisfy strict TypeScript definitions for the Google client
   return google.sheets({ version: 'v4', auth: client as any });
 }
 
 export const handler: APIGatewayProxyHandler = async (event) => {
-  // CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -37,7 +37,6 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     const data = JSON.parse(event.body || '{}');
     const { name, phone, timestamp, consentType, source, userAgent } = data;
 
-    // Validate required fields
     if (!name || !phone) {
       return {
         statusCode: 400,
@@ -46,7 +45,6 @@ export const handler: APIGatewayProxyHandler = async (event) => {
       };
     }
 
-    // Validate phone number format
     const phoneRegex = /^[6-9]\d{9}$/;
     if (!phoneRegex.test(phone)) {
       return {
@@ -57,16 +55,13 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     }
 
     const sheets = await getSheetsClient();
-
-    // Generate unique user ID
     const userId = `USER_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-    // Get client IP from API Gateway
-    const clientIp = event.requestContext?.identity?.sourceIp ||
-      event.headers['X-Forwarded-For']?.split(',')[0] ||
-      'unknown';
+    // Safely retrieve the client IP from the event context
+    const clientIp = event.requestContext?.identity?.sourceIp || 
+                     (event.headers['X-Forwarded-For'] as string)?.split(',')[0] || 
+                     'unknown';
 
-    // Append to Google Sheet (create "CookieConsents" tab with headers)
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
       range: 'CookieConsents!A:H',
@@ -84,8 +79,6 @@ export const handler: APIGatewayProxyHandler = async (event) => {
         ]],
       },
     });
-
-    console.log(`Cookie consent saved: ${name} - ${phone}`);
 
     return {
       statusCode: 200,
