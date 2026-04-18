@@ -21,11 +21,11 @@
   --font-lg: 1.125rem;
   --font-xl: 1.25rem;
   --font-3xl: 1.875rem;
-  
+
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
-  
+
   --transition-ease: all 0.2s ease-in-out;
 }
 
@@ -34,19 +34,23 @@
   background: var(--color-dark-bg);
   color: var(--color-dark-text-secondary);
   font-size: var(--font-sm);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   padding: var(--spacing-16) 0 var(--spacing-6);
+  overflow-x: hidden;
 }
 
-.container {
+.footer .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-6);
+  box-sizing: border-box;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr repeat(3, 2fr);
+  grid-template-columns: 2fr repeat(2, 2fr);
   gap: var(--spacing-8);
   padding-bottom: var(--spacing-12);
   padding-top: 20px;
@@ -55,16 +59,18 @@
 .footer-section-destination {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .footer-section {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 /* Brand Section */
 .footer-brand-section {
-  flex-basis: 300px;
+  min-width: 0;
 }
 
 .footer-brand {
@@ -109,7 +115,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: 0 15px;
-  min-width: 40px;
+  min-width: 80px;
   width: auto; /* അക്ഷരങ്ങളുടെ നീളത്തിനനുസരിച്ച് ബോക്സ് വലുതാകും */
   height: 40px;
   background: var(--color-border);
@@ -122,15 +128,23 @@
 }
 
 /* ഓരോ സോഷ്യൽ മീഡിയ ലിങ്കിനും ഉള്ള നിറങ്ങൾ */
-.social-link.instagram { color: #E4405F; }
-.social-link.youtube { color: #FF0000; }
-.social-link.facebook { color: #1877F2; }
+.social-link.instagram {
+  color: #e4405f;
+}
+.social-link.youtube {
+  color: #ff0000;
+}
+.social-link.facebook {
+  color: #1877f2;
+}
 
 /* മൗസ് വെക്കുമ്പോൾ ഉള്ള മാറ്റം */
 .social-link:hover {
   background: var(--color-accent);
   transform: translateY(-2px);
-  color: var(--color-dark-text-primary); /* ഹോവർ ചെയ്യുമ്പോൾ ടെക്സ്റ്റ് വ്യക്തമാകാൻ */
+  color: var(
+    --color-dark-text-primary
+  ); /* ഹോവർ ചെയ്യുമ്പോൾ ടെക്സ്റ്റ് വ്യക്തമാകാൻ */
 }
 
 /* Link Sections */
@@ -228,16 +242,19 @@
 }
 
 .footer-title-link {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-6);
+  }
 
-  .footer-brand-section {
-    grid-template-columns: repeat(2, 1fr);
-    grid-column: span 1;
+  .footer-links-destination {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -245,47 +262,47 @@
   .footer {
     padding: var(--spacing-12) 0 var(--spacing-6);
   }
+
   .footer-grid {
-    gap: 70px;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
     padding-top: 20px;
   }
-  .footer-brand-section {
-    grid-template-columns: repeat(2, 1fr);
-    grid-column: span 5;
+
+  .footer-links-destination {
+    grid-template-columns: 1fr 1fr;
   }
+
   .footer-bottom-content {
     flex-direction: column;
     text-align: center;
   }
-  .payment-methods, .social-links {
-    justify-content: center;
-  }
-}
-@media (max-width: 480px) {
 
-  .footer-brand-section {
-    grid-template-columns: repeat(2, 1fr);
-    grid-column: span 5;
+  .social-links {
+    flex-wrap: wrap;
   }
-  .brand-logo {
-    justify-content: center;
-  }
+
   .brand-text {
-  font-size: 30px;
-  font-weight: 900;
-  color: #0055ff;
-}
-  .footer-description {
-    text-align: center;
-    margin: 0 auto;
+    font-size: 30px;
   }
-  .footer-title {
-    text-align: center;
-    font-size: 12px;
-  }
-  
-.footer-links-destination{
-    grid-template-columns: repeat(4,1fr);
-    font-size: 10px;
 }
+
+@media (max-width: 480px) {
+  .footer .container {
+    padding: 0 var(--spacing-4);
+  }
+
+  .brand-text {
+    font-size: 24px;
+  }
+
+  .footer-links-destination {
+    grid-template-columns: 1fr;
+  }
+
+  .social-link {
+    padding: 0 12px;
+    height: 36px;
+    font-size: 13px;
+  }
 }
